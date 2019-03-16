@@ -1,0 +1,111 @@
+<!--
+    Copyright 2019 Google LLC
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        https://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Martin's news corner</title>
+
+    <meta name="description" content="Articles on Google Chrome, Google Search and other Google products">
+    <meta name="viewport" content="width=device-width">
+    <!-- Material Components https://material.io/develop/ -->
+    <link rel="stylesheet" href="third_party/material-icons.css">
+    <link rel="stylesheet" href="third_party/material-components-web.min.css">
+
+    <!-- our own styles -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- The sidebar navigation -->
+    <aside class="mdc-drawer mdc-drawer--dismissible">
+      <div class="mdc-drawer__content">
+        <h2 class="mdc-top-app-bar__title">Topics</h2>
+        <ul class="mdc-list">
+          <li>
+            <a class="mdc-list-item mdc-list-item--activated spa-link" href="/" aria-selected="true">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">grade</i>
+              <span class="mdc-list-item__text">The keyword</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="mdc-list-item  spa-link" href="/chrome">
+              <span class="mdc-list-item__text">Google Chrome</span>
+            </a>
+          </li>
+          <li>
+            <a class="mdc-list-item spa-link" href="/search">
+              <span class="mdc-list-item__text">Google Search</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Header content -->
+    <div class="mdc-drawer-app-content">
+      <header class="mdc-top-app-bar app-bar" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button id="menuToggle" class="material-icons mdc-top-app-bar__navigation-icon">menu</button>
+            <h1 class="mdc-top-app-bar__title">Top Stories</h1>
+          </section>
+        </div>
+      </header>
+
+      <!-- the current view content goes in here -->
+      <main class="main-content" id="main-content">
+        <div id="notifications-container"></div>
+        <ul class="mdc-top-app-bar--fixed-adjust story-list" id="content-container"></ul>
+      </main>
+    </div>
+
+    <!-- Template to populate the article list -->
+    <template id="story-item">
+      <li class="mdc-card">
+        <div class="mdc-card__primary-action" tabindex="0">
+          <div class="mdc-card--media media"><img></div>
+          <div>
+            <h2 class="mdc-typography mdc-typography--headline6"></h2>
+            <h3 class="mdc-typography mdc-typography--subtitle2"></h3>
+            <div class="summary"></div>
+            <a class="mdc-button mdc-button--outlined">Read the article</a>
+          </div>
+        </div>
+      </li>
+    </template>
+
+    <!-- Template to show an error message -->
+    <template id="error">
+      <div class="mdc-card error">
+        <div class="mdc-card__primary-action" tabindex="0">
+          <div>
+            <div class="mdc-typography mdc-typography--headline2">
+              <i class="material-icons" aria-hidden="true" style="font-size: 1.5em">error_outline</i>
+              <h2>Oops!</h2>
+            </div>
+            <p class="mdc-typography">Something went wrong :(</p>
+          </div>
+        </div>
+      </li>
+    </template>
+
+    <!-- Material Components JavaScript -->
+    <script src="third_party/material-components-web.min.js"></script>
+
+    <!-- our single page application code -->
+    <script src="app-fixed.js"></script>
+  </body>
+</html>
