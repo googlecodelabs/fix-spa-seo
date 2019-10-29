@@ -27,28 +27,41 @@ const listContainer = document.querySelector('#content-container');
 const notificationsContainer = document.querySelector('#notifications-container');
 const heading = document.querySelector('h1');
 
-// whenever the hash of the URL changes, we load the view for the new hash
-window.addEventListener('hashchange', evt => {
-  let category = window.location.hash.slice(1); // removes the leading '#'
+// we want our web app to work offline and load faster, so we try to install a service worker.
+if ('serviceWorker' in navigator) {
+  // this browser supports service workers!
+  navigator.serviceWorker.register('sw.js').then(initApp);
+} else {
+  // this browser doesn't support service workers, so we don't install one.
+  initApp();
+}
+
+// Functions
+/**
+* Initializes our single page app - sets up routing, etc.
+*/
+function initApp() {
+  // whenever the hash of the URL changes, we load the view for the new hash
+  window.addEventListener('hashchange', evt => {
+    let category = window.location.hash.slice(1); // removes the leading '#'
+    // if the category is empty, show the_keyword as the homepage.
+    if (category == '') category = 'the_keyword';
+    showStoriesForCategory(category);
+  });
+
+  // Load the content for the current hash
+  let category = window.location.hash.slice(1); // we remove the leading '#'
   // if the category is empty, show the_keyword as the homepage.
   if (category == '') category = 'the_keyword';
   showStoriesForCategory(category);
-});
 
-// Load the content for the current hash
-let category = window.location.hash.slice(1); // we remove the leading '#'
-// if the category is empty, show the_keyword as the homepage.
-if (category == '') category = 'the_keyword';
-showStoriesForCategory(category);
-
-// Load the Material Component code for the navigation drawer menu
-const menu = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
-// Make the menu button toggle the navigation menu
-document.getElementById('menuToggle').addEventListener('click', () => {
-  menu.open = !menu.open;
-});
-
-// Functions
+  // Load the Material Component code for the navigation drawer menu
+  const menu = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+  // Make the menu button toggle the navigation menu
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    menu.open = !menu.open;
+  });  
+}
 
 /**
  * Loads the articles for the given category,
