@@ -1,6 +1,8 @@
 Fix SPA SEO codelab
 ============
 
+**THIS REPOSITORY IS DEPRECATED**
+
 This codelab walks you through a single page app (SPA) with SEO issues and illustrates how to identify and fix these issues. You will learn more about debugging tools, SEO tips and important considerations. 
 
 Introduction
